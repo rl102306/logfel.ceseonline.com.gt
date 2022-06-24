@@ -1,0 +1,290 @@
+<button mat-raised-button (click)="Bool_IsEditable = !Bool_IsEditable">
+    {{!Bool_IsEditable ? 'Habilitar modo edicion' : 'Deshabilitar modo edicion'}}
+</button>
+
+<mat-stepper class="stepper" [orientation]="(StepperOrientacion | async)!" #stepper>
+    <mat-step [stepControl]="SC_Primer_Paso" [editable]="Bool_IsEditable">
+        <form [formGroup]="Form_Registrar_Usuario" (ngSubmit)="onSubmitCreateUser()">
+            <div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+                <div>
+                    <h1>Crea una cuenta</h1>
+                </div>
+                <div>
+                    <h5>Es rápido y fácil.</h5>
+                </div>
+            </div>
+            <div fxLayout="row wrap" fxLayoutAlign="space-around center">
+                <div>
+                    <mat-icon>account_circle</mat-icon>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Nombre</mat-label>
+                        <input matInput placeholder="Nombre" formControlName="Name" required>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('Name')?.errors?.['required']">
+                            Debes colocar tu nombre.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-icon>account_circle</mat-icon>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Apellido</mat-label>
+                        <input matInput placeholder="Apellido" formControlName="Apellido" required>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('Apellido')?.errors?.['required']">
+                            Debes colocar tu apellido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-icon>email</mat-icon>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input type="email" matInput placeholder="Correo electronico" formControlName="Email" required>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('Email')?.errors?.['required']">
+                            Debes colocar tu email.
+                        </mat-error>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('Email')?.errors?.['pattern']">
+                            Debes colocar un email valido.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+                <div>
+                    <mat-icon>perm_identity</mat-icon>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ingrese su usuario</mat-label>
+                        <input matInput placeholder="Usuario Para Iniciar Sesion" formControlName="User" required>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('user')?.errors?.['required']">Debes colocar
+                            un usuario.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-icon>lock</mat-icon>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ingrese su contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña"
+                            formControlName="Pass" required>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('Pass')?.errors?.['required']">Debes colocar
+                            una contraseña.
+                        </mat-error>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('Pass')?.errors?.['pattern']">Debe contener al
+                            menos un número y una letra mayúscula y minúscula,
+                            y al menos 8 o más caracteres.</mat-error>
+
+                        <button mat-icon-button matSuffix (click)="hide = !hide" required
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon style="color:black">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-icon>lock</mat-icon>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Confirme su contraseña</mat-label>
+                        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña"
+                            formControlName="ConfirmPass" (change)="onChangeEvent($event)" required>
+                        <mat-error *ngIf="this.Form_Registrar_Usuario.get('ConfirmPass')?.errors?.['required']">Debes
+                            confirmar la contraseña.
+                        </mat-error>
+                        <br />
+
+                        <button mat-icon-button matSuffix (click)="hide = !hide" required
+                            [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                            <mat-icon style="color:black">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+            <br />
+            <div fxLayout="column wrap" fxLayoutAlign="center center">
+                <!-- 
+                <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Seleccione una Suscripcion</mat-label>
+                        <mat-select formControlName="Suscripcion">
+                            <mat-option></mat-option>
+                            <mat-option value="PDP">Periodo de Prueba</mat-option>
+                            <mat-option value="MES">Mensual</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div> -->
+                <div class="card-container">
+                    <button class="card card-small" tabindex="0" mat-raised-button type="submit">
+                        <a>Registrar Usuario</a>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+        <div class="card-container">
+            <button class="card card-small" tabindex="0" mat-raised-button routerLink="/login">
+                <a>Siguiente</a>
+            </button>
+        </div>
+
+    </mat-step>
+
+
+
+
+<!-- 
+    <mat-step [stepControl]="SC_Segundo_Paso" [editable]="Bool_IsEditable">
+            <form [formGroup]="Form_Registrar_Empresa" (ngSubmit)="onSubmitCreateCompany()">
+                <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+                    <div>
+                        <h1>Crear Empresa</h1>
+                    </div>
+                </div>
+
+                <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+                    <div>
+                        <mat-icon>business</mat-icon>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nombre Empresa</mat-label>
+                            <input matInput placeholder="Empresa" formControlName="Nombre_Empresa" required>
+                            <mat-error *ngIf="this.Form_Registrar_Empresa.get('Nombre_Empresa')?.errors?.['required']">
+                                Debes colocar el nombre de tu Empresa.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-icon>business</mat-icon>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Nit</mat-label>
+                            <input matInput placeholder="Nit" formControlName="Nit" required>
+                            <mat-error *ngIf="this.Form_Registrar_Empresa.get('Nit')?.errors?.['required']">
+                                Debes colocar el nit de tu Empresa.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-icon>business</mat-icon>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Direccion</mat-label>
+                            <input matInput placeholder="Direccion" formControlName="Direccion_Empresa" required>
+                            <mat-error *ngIf="this.Form_Registrar_Empresa.get('Direccion_Empresa')?.errors?.['required']">
+                                Debes colocar la direccion de tu Empresa.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>     
+                </div>
+
+                <div fxLayout="column wrap" fxLayoutAlign="space-around center">
+                        <div>
+                            <h4>Selecciona el logo que deseas cargar:</h4>
+                        </div>
+                        <div>
+                            <input type="file" name="Upload_Logo_Empresa" (change)="Get_File_Input($event)" requerid />
+                        </div>
+                        <div class="card-container">
+                            <button class="card card-small" tabindex="0" mat-raised-button type="submit">
+                                <a>Registrar Empresa</a>
+                            </button>
+                        </div>
+                </div>
+            </form>
+            <div fxLayout="row wrap" fxLayoutAlign="center center">
+            <div class="card-container">
+                <button class="card card-small" mat-raised-button matStepperPrevious style="float: left;"><a>Anterior</a></button>
+            </div>
+            <div class="card-container">
+                <button class="card card-small" mat-raised-button matStepperNext style="float: right;"><a>Siguiente</a></button>
+            </div>
+        </div>
+    </mat-step>
+
+-->
+
+<!-- <mat-step [stepControl]="SC_Tercer_Paso" [editable]="Bool_IsEditable">
+  
+    <div fxLayout="column wrap" fxLayoutAlign="space-around center" >
+      
+    
+        <div><h1>Bienvenid@ a LoGFeL</h1></div>
+      
+    
+        
+  
+        <div><h3>En este momento tu usuario se encuentra inactivo. Pero no te preocupes.</h3></div>
+   <div>
+    <address>
+        <div fxLayout="column wrap" fxLayoutAlign="space-around center" >
+    <div>
+      <h2>Escríbenos un correo a info@ceseonline.com.gt <br></h2>
+      </div>
+      <div>   
+        <h1><a style="color:black" href="mailto:info@ceseonline.com.gt?subject=Activación%20Usuario&body=Empresa: %20 Usuario: %20">Enviar</a>    </h1>
+    </div>
+    <div>
+      <h4>Con el siguiente formato</h4><br>
+    </div>
+    <div>
+      <h4>Empresa: </h4><br>
+    </div>
+    <div>
+      <h4>Usuario:</h4><br>
+    </div>
+    <div>
+      <h4>Después de recibido el correo lo habilitaremos.<br></h4>
+    </div>    
+    </div>
+    </address>
+    </div>
+    <div class="card-container">
+        <button class="card card-small" mat-raised-button matStepperPrevious style="float: left;"><a>Anterior</a></button>
+    </div>
+    </div>    
+</mat-step> -->
+  
+  
+</mat-stepper>
+
+<!--    
+    <mat-step [stepControl]="infoEmail" [editable]="isEditable">
+      
+      <div fxLayout="row" fxLayoutAlign="space-around center" >
+        
+      <mat-card class="box">
+      
+        <mat-card-header>
+    
+          <mat-card-title>Bienvenido a LOGFEL</mat-card-title>
+        
+        </mat-card-header>
+    
+          <mat-card-content>
+    
+          <h3>En este momento tu usuario se encuentra inactivo.</h3>
+     
+      <address>
+    
+        <h2>Escríbenos un correo a info@ceseonline.com.gt <br><a href="mailto:info@ceseonline.com.gt?subject=Activación%20Usuario&body=Empresa: %20 Usuario: %20">Enviar</a></h2><br> 
+        
+        <h4>Con el siguiente formato</h4><br>
+    
+        <h4>Empresa: </h4><br>
+    
+        <h4>Usuario:</h4><br>
+        
+        <h4>Después de recibido el correo lo habilitaremos.<br></h4>
+    
+      </address>
+      
+    </mat-card-content>
+    
+      </mat-card>
+      </div>
+      <div>
+        <button mat-raised-button matStepperPrevious style="float: left;">Anterior</button>
+      </div>
+    </mat-step>
+    
+    
+    </mat-stepper>
+    
+    </div>
+-->

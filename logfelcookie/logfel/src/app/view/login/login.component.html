@@ -1,0 +1,48 @@
+<div style="background-color:white;">
+    <div fxLayout="column wrap" fxLayoutAlign="center center">
+        <div mat-card-avatar>
+            <mat-icon>person</mat-icon>
+        </div>
+        <div>
+            <h3>Iniciar Sesión</h3>
+        </div>
+        <div>
+            <h4>Bienvenido</h4>
+        </div>
+    </div>
+    <form [formGroup]="Form_Login" (ngSubmit)="onSubmitLogin()">
+        <div fxLayout="row wrap" fxLayoutAlign="center center">
+            <div>
+                <mat-icon>account_circle</mat-icon>
+                <mat-form-field appearance="fill">
+                    <mat-label>Ingrese su usuario</mat-label>
+                    <input matInput placeholder="Usuario" formControlName="user" required>
+                    <mat-error *ngIf="this.Form_Login.get('user')?.errors?.['required']">Debes colocar un usuario.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-icon>lock</mat-icon>
+                <mat-form-field appearance="fill">
+                    <mat-label>Ingrese su contraseña</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña" formControlName="pass"
+                        required>
+                    <mat-error *ngIf="this.Form_Login.get('pass')?.errors?.['required']">Debes colocar una contraseña.
+                    </mat-error>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" required
+                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon style="color:black">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+            </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+            <div class="card-container">
+                <button class="card card-small"  tabindex="0" type="submit">
+                    <a>Acceder</a>
+                </button>
+            </div>
+        </div>
+    </form>
+
+</div>

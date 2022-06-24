@@ -1,0 +1,57 @@
+<div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+    <div>
+        <h1>Elige tu plan</h1>
+    </div>
+    <div>
+        <h5>Personaliza tus facturas electronicas sin límites en tu teléfono, computadora y otros dispositivos.</h5>
+    </div>
+</div>
+
+<mat-grid-list [cols]="breakpoint" rowHeight="450px" (window:resize)="onResize($event)">
+    <mat-grid-tile id = "Plan_Free">
+        <mat-card class="Plan_Free_Card">
+            <mat-card-header>
+              <mat-card-title>Free</mat-card-title>
+              <mat-card-subtitle>15 dias de uso gratuito.</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+              <ul>
+                  <li>Sin limites de factura.</li>
+                  <li>Diferentes tamaños a tu logo.</li>
+                  <li>Elige la posicion del logo.</li>
+                  <li>Codigo QR.</li>
+                  <li>Slogan.</li>
+              </ul>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="card-container">
+                <button class="card card-small" (click)="Plan_Free()"><a>COMENZAR</a></button>
+                </div>
+            </mat-card-actions>
+            <p style="font-size: 10px;">Se aplican Términos y Condiciones. El periodo de 15 dias gratis no está disponible para los usuarios que ya se hayan suscrito al plan mensual.</p>
+          </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile id = "Plan_Mensual">
+        <mat-card class="Plan_Mensual_Card">
+            <mat-card-header>
+              <mat-card-title><div style="background: rgba(0,0,0,.03);">Mensual</div></mat-card-title>
+              <mat-card-subtitle>Q 150.00 / mes</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <ul>
+                    <li>Sin limites de factura.</li>
+                    <li>Diferentes tamaños a tu logo.</li>
+                    <li>Elige la posicion del logo.</li>
+                    <li>Codigo QR.</li>
+                    <li>Slogan.</li>
+                </ul>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="card-container">
+                <button class="card card-small" (click)="Plan_Mensual()"><a>COMENZAR</a></button>
+                </div>
+            </mat-card-actions>
+            <p style="font-size: 10px;">Se aplican Términos y Condiciones. El periodo de 15 dias gratis no está disponible para los usuarios que ya se hayan suscrito al plan mensual.</p>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

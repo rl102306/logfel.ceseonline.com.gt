@@ -1,0 +1,54 @@
+<form [formGroup]="Form_Registrar_Empresa" (ngSubmit)="onSubmitCreateCompany()">
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div>
+            <h1>Crear Empresa</h1>
+        </div>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+        <div>
+            <mat-icon>business</mat-icon>
+            <mat-form-field appearance="fill">
+                <mat-label>Nombre Empresa</mat-label>
+                <input matInput placeholder="Empresa" formControlName="Nombre_Empresa" required>
+                <mat-error *ngIf="this.Form_Registrar_Empresa.get('Nombre_Empresa')?.errors?.['required']">
+                    Debes colocar el nombre de tu Empresa.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-icon>business</mat-icon>
+            <mat-form-field appearance="fill">
+                <mat-label>Nit</mat-label>
+                <input matInput placeholder="Nit" formControlName="Nit" required>
+                <mat-error *ngIf="this.Form_Registrar_Empresa.get('Nit')?.errors?.['required']">
+                    Debes colocar el nit de tu Empresa.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-icon>business</mat-icon>
+            <mat-form-field appearance="fill">
+                <mat-label>Direccion</mat-label>
+                <input matInput placeholder="Direccion" formControlName="Direccion_Empresa" required>
+                <mat-error *ngIf="this.Form_Registrar_Empresa.get('Direccion_Empresa')?.errors?.['required']">
+                    Debes colocar la direccion de tu Empresa.
+                </mat-error>
+            </mat-form-field>
+        </div>     
+    </div>
+
+    <div fxLayout="column wrap" fxLayoutAlign="space-around center">
+            <div>
+                <h4>Selecciona el logo que deseas cargar:</h4>
+            </div>
+            <div>
+                <input type="file" name="Upload_Logo_Empresa" (change)="Get_File_Input($event)" requerid />
+            </div>
+            <div class="card-container">
+                <button class="card card-small" tabindex="0" mat-raised-button type="submit">
+                    <a>Registrar Empresa</a>
+                </button>
+            </div>
+    </div>
+</form>

@@ -1,0 +1,193 @@
+<button mat-raised-button (click)="Bool_IsEditable = !Bool_IsEditable">
+  {{!Bool_IsEditable ? 'Habilitar modo edicion' : 'Deshabilitar modo edicion'}}
+</button>
+
+
+
+<mat-stepper class="stepper" [orientation]="(StepperOrientacion | async)!" #stepper>
+  <mat-step [stepControl]="SC_Primer_Paso" [editable]="Bool_IsEditable">
+    <div fxLayout="column wrap" fxLayoutAlign="center center">
+      <div>
+        <h2>Documentos</h2>
+      </div>
+      <div>
+        <h4>Seleccione el archivo que desea cargar:</h4>
+      </div>
+      <div>
+        <input type="file" name="Upload_PDF_Fact" (change)="Get_File_Input($event)" requerid />
+      </div>
+      <div class="card-container">
+        <button class="card card-small" tabindex="0" (click)="Upload_File()">
+          <a>Cargar</a>
+          <mat-icon class="white-icon">file_upload</mat-icon>
+        </button>
+      </div>
+      <div class="card-container">
+        <button class="card card-small" tabindex="0" matStepperNext><a>Siguiente</a></button>
+      </div>
+    </div>
+  </mat-step>
+
+  <mat-step [stepControl]="SC_Segundo_Paso" [editable]="Bool_IsEditable">
+
+
+    <ngx-extended-pdf-viewer
+          [src]="File_Url_Preview"
+          [textLayer]="true" 
+          [useBrowserLocale]="true"
+          [showPrintButton]="false"
+          [showDownloadButton]="false"
+          [showOpenFileButton]="false" 
+          height="60vh"
+          id="Ngx_Segundo_Paso"
+          [mobileFriendlyZoom]="zoom"
+        ></ngx-extended-pdf-viewer>
+    <div fxLayout="row wrap" fxLayoutAlign="center center">
+      <div class="card-container">
+        <button class="card card-small" mat-raised-button matStepperPrevious
+          style="float: left;"><a>Anterior</a></button>
+      </div>
+      <div class="card-container">
+        <button class="card card-small" mat-raised-button matStepperNext style="float: right;"><a>Siguiente</a></button>
+      </div>
+    </div>
+
+
+
+  </mat-step>
+
+  <mat-step [stepControl]="SC_Tercer_Paso" [editable]="Bool_IsEditable">
+
+    <div fxLayout="column wrap" fxLayoutAlign="center center">
+      <div>
+        <h1>Factura</h1>
+      </div>
+      <div>
+        <h3>Seleccione la posicion del logo:</h3>
+      </div>
+    </div>
+    <mat-radio-group aria-label="Seleccion una opcion: " (change)="MostrarTam($event)">
+      <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+
+        <div>
+          <mat-radio-button value="izquierda">
+            Izquierda </mat-radio-button>
+        </div>
+        <div>
+          <mat-radio-button value="derecha">
+            Derecha
+          </mat-radio-button>
+        </div>
+      </div>
+
+    </mat-radio-group>
+    <div *ngIf="Mostrar_Tam">
+      <mat-radio-group aria-label="Seleccion una opcion: " (change)="GetTam($event)">
+        <div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+
+          <div>
+            <h3>Seleccione el tamaño del logo:</h3>
+          </div>
+        </div>
+        <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+
+          <div>
+            <mat-radio-button value="peque">
+              Pequeño </mat-radio-button>
+          </div>
+          <div>
+            <mat-radio-button value="medio">
+              Mediano
+            </mat-radio-button>
+          </div>
+          <div>
+            <mat-radio-button value="grande">
+              Grande
+            </mat-radio-button>
+          </div>
+        </div>
+      </mat-radio-group>
+      <br />
+      <div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+        <div>
+          <h3>Opcional Codigo QR: </h3>
+        </div>
+        <div>
+          <mat-slide-toggle 
+            [checked]="Bool_Checked_MST"
+            [disabled]="Bool_Disabled_MST"
+            (change)="Mat_Toggle_Changes_Codigo_QR($event)">
+            Codigo QR
+          </mat-slide-toggle>
+        </div>
+      </div>
+
+      <div *ngIf="Mostrar_Div_QR">
+        <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
+
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Link:</mat-label>
+              <input matInput placeholder="Ingrese su link" id="Cod_QR" name="Cod_QR">
+          </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="fill">
+              <mat-label>Slogan:</mat-label>
+              <input matInput placeholder="Ingrese su slogan" id="Slogan" name="Slogan" maxlength="115">
+          </mat-form-field>
+          </div>
+
+        </div>
+      </div>
+
+      <div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+        <div class="card-container">
+          <button class="card card-small" mat-raised-button (click)="Get_Fact_Mod()">
+            <mat-icon class="white-icon">create</mat-icon>
+            <a>Generar Factura</a>
+          </button>
+        </div>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="center center">
+        <div class="card-container">
+          <button class="card card-small" mat-raised-button matStepperPrevious
+            style="float: left;"><a>Anterior</a></button>
+        </div>
+        <div class="card-container">
+          <button class="card card-small" mat-raised-button matStepperNext style="float: right;"><a>Siguiente</a></button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </mat-step>
+
+  <mat-step [stepControl]="SC_Cuarto_Paso" [editable]="Bool_IsEditable">
+    <div fxLayout="column wrap" fxLayoutAlign="space-evenly center">
+      <!-- <div id="Fact_Final_Preview" style="width: 100%; height: 70vh;"> -->
+        <div class="card-container">
+          <button class="card card-small" tabindex="0" (click)="DownLoad_File()">
+            <a>Descargar</a>
+            <mat-icon class="white-icon">file_download</mat-icon>
+          </button>
+        </div>
+    <!--<ng2-pdfjs-viewer 
+    #pdfViewerOnDemand  
+    [startDownload]="true" 
+    [startPrint]="false"
+    [useOnlyCssZoom]="true"
+    ></ng2-pdfjs-viewer> -->
+    <!--</div> -->
+    <div class="card-container">
+      <button class="card card-small" mat-raised-button matStepperNext style="float: right;"(click)="refresh()"><a>Reiniciar</a></button>
+    </div>
+    </div>
+
+  </mat-step>
+
+</mat-stepper>
+
+
