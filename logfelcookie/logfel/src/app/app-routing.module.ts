@@ -10,6 +10,8 @@ import { PagoComponent } from './view/pago/pago.component';
 import { SuscripcionComponent } from './view/suscripcion/suscripcion.component';
 import { EmpresaComponent } from './view/empresa/empresa.component';
 import { RenovarSuscripcionComponent } from './view/renovar-suscripcion/renovar-suscripcion.component';
+import { PexComponent } from './view/pex/pex.component';
+import { PreComponent } from './view/pre/pre.component';
 
 const routes: Routes = [
   
@@ -22,6 +24,8 @@ const routes: Routes = [
   {path: 'suscripcion', component:SuscripcionComponent,canActivate:[NlGuard]},
   {path: 'empresa',component:EmpresaComponent,canActivate:[NlGuard]},
   {path: 'renovar-suscripcion',component:RenovarSuscripcionComponent,canActivate:[NlGuard]},
+  {path: 'pex',component:PexComponent,canActivate:[NlGuard]},
+  {path: 'pre',component:PreComponent,canActivate:[NlGuard]},
 
 ];
 

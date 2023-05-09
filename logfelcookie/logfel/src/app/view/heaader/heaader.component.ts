@@ -2,7 +2,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthUserService } from 'src/app/auth/auth-user.service';
 import { PrimerIngresoService } from 'src/app/models/primer-ingreso.service';
-import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-heaader',
@@ -18,7 +18,7 @@ export class HeaaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.authSVC.isLoggedIn().subscribe((res) => this.isLogged = res)
-}
+  }
 
   mobileQuery: MediaQueryList | any;
   toggleActive = false;
@@ -29,7 +29,7 @@ export class HeaaderComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private authSVC: AuthUserService,
               private PrimerIngreso: PrimerIngresoService) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQuery = media.matchMedia('(max-width: 2560px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
   }

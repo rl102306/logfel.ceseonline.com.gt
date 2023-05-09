@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
     })
 
   }
-  onSubmitLogin() {
+  onSubmitLogin() 
+  {
     const UserData = {
       username: this.Form_Login.get('user').value,
       password: this.Form_Login.get('pass').value
@@ -54,30 +55,21 @@ export class LoginComponent implements OnInit {
           }
 
           this.Sus_Existe.Existe_Suscripcion(Json_User_Param).subscribe({
+
             next: (res: any) => {
 
               if (res.Existe == true) {
-
-                Swal.fire(
-                  {
-                    title: 'Bienvenido!',
-                    text: 'Gracias por volver',
-                    icon: 'success',
-                    confirmButtonText: 'Cerrar'
-                  }
-                );
 
                 this.Sus_Existe.Estado_Suscripcion(Json_User_Param).subscribe({
 
                   next: (res: any) => {
 
-                    console.log("Estado de suscripcion")
-                    console.log(res)
-
                     if (res.Estado == true) {
 
                       this.PrimerIngreso.Obtener_Empresa(Json_User_Param).subscribe({
+                        
                         next: (res: any) => {
+                        
                           if (res.Existe == true) {
                             Swal.fire(
                               {
@@ -88,31 +80,35 @@ export class LoginComponent implements OnInit {
                               }
                             );
                             this.router.navigate(["ucf"]);
-                          } else {
-                            console.log("res que viene")
-                            console.log(res)
-                            Swal.fire(
-                              {
+                          } 
+                          else 
+                          {
+                            
+                            Swal.fire({
                                 title: 'Oops...',
                                 text: 'Debes registrar una empresa.',
                                 icon: 'success',
                                 confirmButtonText: 'Cerrar'
-                              }
-                            );
-
-                            this.router.navigate(["empresa"]);
+                            });
+                            
+                              this.router.navigate(["empresa"]);
                           }
                         },
                         error: (err) => {
-                          console.log("Error de Django")
-                          Swal.fire({ title: 'Oops...', text: '¡Algo salió mal!, por favor intenta de nuevo.' + err, icon: 'error', confirmButtonText: 'Cerrar' });
+                          
+                          Swal.fire({ 
+                            title: 'Oops... ', 
+                            text: '¡Algo salió mal!, por favor intenta de nuevo.' + err, 
+                            icon: 'error', 
+                            confirmButtonText: 'Cerrar' 
+                          });
                         }
 
-                      })
+                    })
 
                     } else {
 
-                      console.log("Ocurrio un error")
+                      console.log("Ocurrio un error ")
                       console.log(res)
                       Swal.fire({
                         title: 'Oops...',
@@ -121,12 +117,13 @@ export class LoginComponent implements OnInit {
                         confirmButtonText: 'Cerrar'
                       });
 
-                    }
+                    
                     this.router.navigate(["renovar-suscripcion"]);
+                    }
                   },
                   error: (err) => {
-                    console.log("Error de Django")
-                    Swal.fire({ title: 'Oops...', text: '¡Algo salió mal!, por favor intenta de nuevo.' + err, icon: 'error', confirmButtonText: 'Cerrar' });
+                    console.log("Error de Django 5")
+                    Swal.fire({ title: 'Oops... 5', text: '¡Algo salió mal!, por favor intenta de nuevo.' + err, icon: 'error', confirmButtonText: 'Cerrar' });
                   }
                 })
 
@@ -147,7 +144,7 @@ export class LoginComponent implements OnInit {
             },
             error: (err) => {
               Swal.fire({
-                title: 'Oops...',
+                title: 'Oops... 6',
                 text: '¡Algo salió mal!, por favor intenta de nuevo.' + err,
                 icon: 'error',
                 confirmButtonText: 'Cerrar'

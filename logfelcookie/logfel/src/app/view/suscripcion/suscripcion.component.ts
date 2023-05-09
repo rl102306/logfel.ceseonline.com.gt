@@ -30,7 +30,7 @@ export class SuscripcionComponent implements OnInit {
 
   ngOnInit(): void {
     this.breakpoint = (window.innerWidth <= 800) ? 1 : 2;
-    this.LoginEBI();
+    //this.LoginEBI();
   }
 
   onResize(event: any) {
@@ -43,22 +43,20 @@ export class SuscripcionComponent implements OnInit {
     const Form_Data = new FormData();
     Form_Data.append('llave', '24dd6249787d91870bf89b36fae4307bcbd21226');
     Form_Data.append('usuario', 'ronaldolara58@gmail.com');
-    Form_Data.append('clave', 'Ebi2022$$')
+    Form_Data.append('clave', 'Cese2023$$')
 
     this.EbiPay.Login_Ebi_Pay(Form_Data).subscribe({
       next: (res: any) => {
         if (res.result == "success") {
           this.Token_Ebi_Pay = res.data.token
-          console.log("Exito")
           console.log(res)
         } else {
-          console.log("Fracaso")
           console.log(res)
         }
       },
       error: (err) => {
-        console.log("Error del Post de EbiPay Login")
-        Swal.fire({ title: 'Oops...', text: '¡Algo salió mal!, por favor intenta de nuevo.' + err, icon: 'error', confirmButtonText: 'Cerrar' });
+        //console.log("Error del Post de EbiPay Login")
+        Swal.fire({ title: 'Oops... Error EBI', text: '¡Algo salió mal!, por favor intenta de nuevo.' + err, icon: 'error', confirmButtonText: 'Cerrar' });
       }
     })
 
